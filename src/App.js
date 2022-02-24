@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import {Users} from './data'
 import './App.css';
+import Table from './Table';
 
 /* 🍀way 1. BASIC SEARCH
 .filter
@@ -31,38 +32,81 @@ import './App.css';
   50. ... map loop안에 데이터바인딩 ㄱㄱ
 */
 
+// function App() {
+
+//   // 🍉way1-10 
+//   const [query, setQuery] = useState("");
+
+//   console.log(query)
+
+//   return (
+//     <div className="App">
+
+//       <h1> search filter</h1>
+
+//       {/* 🍉way1-10 */}
+//       <input className='search' placeholder='search...' onChange={(e)=>( setQuery(e.target.value.toLowerCase()))}/>
+      
+//       <ul className='list'>
+      
+//         {/* 🍉way1-20, -30, -40 */}
+//         {
+//           Users.filter((p)=>(p.first_name.toLowerCase().includes(query))).map((user)=>(
+//           <li className="listItem" key={user.id}>
+//                       {user.first_name}
+//             </li>
+//           ))
+//         }
+//       </ul>    
+
+//     </div>
+//   );
+// }
+
+
+
+
+/* 🍀way 2.SEARCH ON A DATATABLE
+function밖으로 뺌
+
+filter, some, const keys
+
+*/
+/* 🦄🍄
+1.data.filter
+
+2. keys.some
+
+3. data.filter한 것+ keys.some한 것 둘다 있으면, 
+
+includes(~) 실행
+*/
+
 function App() {
 
-  // 🍉way1-10 
   const [query, setQuery] = useState("");
 
-  console.log(query)
+  const keys = ["first_name", "last_name", "email"];
 
-  return (
-    <div className="App">
+  const search = (data) => {
+    return data.filter((item) =>
+      keys.some((key) => item[key].toLowerCase().includes(query))
+    );
+  };
 
-      <h1> search filter</h1>
+return (
+  <div className="app">
+      <input
+        className="search"
+        placeholder="Search..."
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+      />
+    
+    {<Table data={search(Users)} />}
 
-      {/* 🍉way1-10 */}
-      <input className='search' placeholder='search...' onChange={(e)=>( setQuery(e.target.value.toLowerCase()))}/>
-      
-      <ul className='list'>
-      
-        {/* 🍉way1-20, -30, -40 */}
-        {
-          Users.filter((p)=>(p.first_name.toLowerCase().includes(query))).map((user)=>(
-          <li className="listItem" key={user.id}>
-                      {user.first_name}
-            </li>
-          ))
-        }
-      </ul>    
-
-    </div>
-  );
+  </div>
+);
 }
-
-
 
 
 
