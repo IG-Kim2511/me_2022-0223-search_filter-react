@@ -209,7 +209,8 @@ function App() {
   return (
     <div className="app">
 
-      <h1>search filter-way3.api - react</h1>
+      <h1>Search Filter-way3.api - react</h1>
+      <h1>Game of throne API</h1>
 
       {/* 🍉w3-20 */}
       <input className="search" 
