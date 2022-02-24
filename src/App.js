@@ -45,7 +45,7 @@ import Table_w3 from './Table_w3';
 //   return (
 //     <div className="App">
 
-//       <h1> search filter</h1>
+//        <h1>search filter-way1 basic - react</h1>
 
 //       {/* 🍉way1-10 */}
 //       <input className='search' placeholder='search...' onChange={(e)=>( setQuery(e.target.value.toLowerCase()))}/>
@@ -121,7 +121,7 @@ array.some(a) : array안에 a 가 있으면 true
 
 // return (
 //   <div className="app">
-
+//      <h1>search filter-way2 database- react</h1>
 //       {/* 🍉w2-10 */}
 //       <input
 //         className="search"
@@ -141,7 +141,7 @@ array.some(a) : array안에 a 가 있으면 true
 
 /* 🦄🍄
 
-10. data : axios data 넣음
+10. data : axios data 넣음 , query갱신될때마다 실행
 
 20. query : input value 넣음
 
@@ -209,7 +209,7 @@ function App() {
   return (
     <div className="app">
 
-      <h1>w3</h1>
+      <h1>search filter-way3.api - react</h1>
 
       {/* 🍉w3-20 */}
       <input className="search" 
