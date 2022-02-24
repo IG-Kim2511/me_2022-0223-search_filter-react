@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Table = ({data}) => {
+const Table = ({pp_data_users}) => {
   return (
     <table>
       <tbody>
@@ -9,11 +9,11 @@ const Table = ({data}) => {
           <th>Surname</th>
           <th>Email</th>
         </tr>
-        {data.map((item) => (
-          <tr key={item.id}>
-            <td>{item.first_name}</td>
-            <td>{item.last_name}</td>
-            <td>{item.email}</td>
+        {pp_data_users.map((ppp_item) => (
+          <tr key={ppp_item.id}>
+            <td>{ppp_item.first_name}</td>
+            <td>{ppp_item.last_name}</td>
+            <td>{ppp_item.email}</td>
           </tr>
         ))}
       </tbody>
