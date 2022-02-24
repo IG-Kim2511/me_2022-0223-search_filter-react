@@ -4,6 +4,7 @@ import axios from "axios";
 import {Data_Users} from './data'
 import './App.css';
 import Table from './Table';
+import Table_w3 from './Table_w3';
 
 
 /* 🍀way 1. BASIC SEARCH
@@ -140,55 +141,57 @@ array.some(a) : array안에 a 가 있으면 true
 
 function App() {  
   
+  const [data, setData] = useState([])
+
+  const [query, setQuery] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
  
-      const res = await axios.get(`https://thronesapi.com/api/v2/Characters`);
+      const res = await axios.get(`https://thronesapi.com/api/v2/Characters`);   
       
       console.log(res.data)
+      setData(res.data);
     };
     
     fetchData();
-  }, []);
+
+    
+    // 🍉3글자이상일때만 실행하기 코드
+    // if (query.length === 0 || query.length > 2) fetchData();
+  }, [query]);
+
+
+  const search = (p_data_users) => {
+      return p_data_users.filter((pp_data_item) =>
+
+        // 🍉w2-30
+        pp_data_item.family.toLowerCase().includes(query) ||
+        pp_data_item.firstName.toLowerCase().includes(query) ||
+        pp_data_item.image.toLowerCase().includes(query) 
+
+        // 🍉w2-30-2
+        // keys.some((key) => pp_data_item[key].toLowerCase().includes(query))
+    );
+  };
+
 
   return (
     <div className="app">
 
+      <h1>w3</h1>
+
+      <input className="search" 
+      placeholder="Search..." 
+      onChange={(e) => setQuery(e.target.value.toLowerCase())}/>
+
+      {/* <Table_w3 pp_data_users={data} /> */}
+
+      <Table_w3 pp_data_users={search(data)} />
+
     </div>
   );
 }
-
-
-// function App() {
-//   const [query, setQuery] = useState("");
-//   const [data, setData] = useState([]);
-
-  
-  
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       // const res = await axios.get(`http://localhost:5000?q=${query}`);
-//       const res = await axios.get(`https://thronesapi.com/api/v2/Characters`);
-      
-//       console.log(res)
-//       setData(res.data);
-//     };
-//     if (query.length === 0 || query.length > 2) fetchData();
-//   }, [query]);
-
-//   return (
-//     <div className="app">
-//         <input
-//           className="search"
-//           placeholder="Search..."
-//           onChange={(e) => setQuery(e.target.value.toLowerCase())}
-//         />
-//       {<Table data={data} />}
-//     </div>
-//   );
-// }
-
-
 
 
 export default App;
