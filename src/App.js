@@ -64,15 +64,31 @@ import Table from './Table';
 // }
 
 
+// 🍀way 2.SEARCH ON A DATATABLE
 
-
-/* 🍀way 2.SEARCH ON A DATATABLE
-function밖으로 뺌
-
-filter, some, const keys
-
-*/
 /* 🦄🍄
+05. point : filter, some, includes -> function 밖으로 빼서 사용함
+
+10.input에 입력한 value - setQuery로 입력
+
+20. data, map loop,화면 표시 - Users.map((user)=>(~~~))
+
+30. data
+
+
+
+40. filter((p)=>(p.first_name.toLowerCase().includes(query)))
+
+filter((p)=>(p.first_name.toLowerCase(): filter로 걸러진 단어들 안에 , 
+
+.includes(query)) : input....query안의 단어들 이 있으면
+
+true값 리턴
+
+
+
+input에 입력한 value - setQuery로 입력
+
 1.data.filter
 
 2. keys.some
@@ -86,23 +102,28 @@ function App() {
 
   const [query, setQuery] = useState("");
 
+   // 🍉w2-40
   const keys = ["first_name", "last_name", "email"];
 
-  const search = (data) => {
-    return data.filter((item) =>
+  // 🍉w2-05, -10, 
+  const search = (p_data) => {
+    return p_data.filter((item) =>
       keys.some((key) => item[key].toLowerCase().includes(query))
     );
   };
 
 return (
   <div className="app">
+
+      {/* 🍉w2-10 */}
       <input
         className="search"
         placeholder="Search..."
         onChange={(e) => setQuery(e.target.value.toLowerCase())}
       />
     
-    {<Table data={search(Users)} />}
+      {/* 🍉w2-30 */}
+    <Table data={search(Users)} />
 
   </div>
 );
