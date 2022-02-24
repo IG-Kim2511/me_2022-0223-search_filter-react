@@ -136,21 +136,50 @@ array.some(a) : array안에 a 가 있으면 true
 // );
 // }
 
-/* 🍀way 3. API SEARCH
+
+// 🍀way 3. API SEARCH
+
+/* 🦄🍄
+
+10. data : axios data 넣음
+
+20. query : input value 넣음
+
+
+30. (하드코딩) search function + data_users 적용
+
+data.id, data.name....등등이 .includes(query) 인때
+
+<table/>로 데이터 넘김
+
+30-2. (소프트코딩) data.id, data.name....등등을 const keys에 array로 뺌
+
+array.some(a) : array안에 a 가 있으면 true
+
+
+40. search function에서 솎아낸 data를 <table_w3/>으로 보냄
+
 */
 
 function App() {  
+
+  const url = "https://thronesapi.com/api/v2/Characters";
   
   const [data, setData] = useState([])
 
   const [query, setQuery] = useState("");
 
+  // 🍉w2-30-2
+  const keys = ["family", "firstName", "image"];
+
+  // 🍉w3-10
   useEffect(() => {
     const fetchData = async () => {
  
-      const res = await axios.get(`https://thronesapi.com/api/v2/Characters`);   
+      const res = await axios.get(url);   
       
       console.log(res.data)
+
       setData(res.data);
     };
     
@@ -162,16 +191,17 @@ function App() {
   }, [query]);
 
 
+  // 🍉w3-20, -40 
   const search = (p_data_users) => {
       return p_data_users.filter((pp_data_item) =>
 
-        // 🍉w2-30
-        pp_data_item.family.toLowerCase().includes(query) ||
-        pp_data_item.firstName.toLowerCase().includes(query) ||
-        pp_data_item.image.toLowerCase().includes(query) 
+        // 🍉w2-30 
+        // pp_data_item.family.toLowerCase().includes(query) ||
+        // pp_data_item.firstName.toLowerCase().includes(query) ||
+        // pp_data_item.image.toLowerCase().includes(query) 
 
         // 🍉w2-30-2
-        // keys.some((key) => pp_data_item[key].toLowerCase().includes(query))
+        keys.some((key) => pp_data_item[key].toLowerCase().includes(query))
     );
   };
 
@@ -181,12 +211,13 @@ function App() {
 
       <h1>w3</h1>
 
+      {/* 🍉w3-20 */}
       <input className="search" 
       placeholder="Search..." 
       onChange={(e) => setQuery(e.target.value.toLowerCase())}/>
 
-      {/* <Table_w3 pp_data_users={data} /> */}
-
+      
+      {/* 🍉w2-40  */}
       <Table_w3 pp_data_users={search(data)} />
 
     </div>
